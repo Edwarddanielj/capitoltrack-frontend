@@ -134,7 +134,7 @@ function App() {
         <div className="politician-list">
           {politicians.length > 0 ? (
             politicians.map((pol) => (
-              <div key={pol.id} className="politician-card">
+              <div key={pol.name} className="politician-card">
                 {pol.photo_url && (
                   <img
                     src={pol.photo_url}
