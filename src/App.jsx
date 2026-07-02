@@ -24,7 +24,7 @@ function App() {
   async function fetchPoliticians() {
     const response = await fetch(`${API_BASE}/api/politicians?limit=5`);
     const data = await response.json();
-    setPoliticians(data.results || data.politicians || []);
+    setPoliticians(data.results || []);
   }
 
   async function fetchTrades(currentPage = 1) {
@@ -52,7 +52,6 @@ function App() {
     fetchTrades(1);
   }, []);
 
-  // Re-fetch when page changes
   useEffect(() => {
     fetchTrades(page);
   }, [page]);
@@ -67,6 +66,7 @@ function App() {
     setState("");
     setTicker("");
     setPage(1);
+
     setTimeout(() => {
       fetchTrades(1);
     }, 100);
@@ -74,9 +74,12 @@ function App() {
 
   function getTradeTypeClass(tradeType) {
     if (!tradeType) return "";
+
     const lower = tradeType.toLowerCase();
+
     if (lower.includes("purchase")) return "trade-type-purchase";
     if (lower.includes("sale")) return "trade-type-sale";
+
     return "";
   }
 
@@ -87,6 +90,16 @@ function App() {
 
   return (
     <div className="app">
+      <nav className="top-nav">
+        <div className="brand">
+          Capitol<span>Track</span>
+        </div>
+
+        <div className="nav-actions">
+          <button className="nav-pill">Live Data</button>
+          <button className="nav-pill">Alerts</button>
+        </div>
+      </nav>
 
       {/* ── HEADER ── */}
       <header className="hero">
@@ -95,8 +108,11 @@ function App() {
             <span className="live-dot"></span>
             Live Data Connected
           </div>
+
           <p className="eyebrow">Congressional Trading Dashboard</p>
+
           <h1>CapitolTrack</h1>
+
           <p className="subtitle">
             Track what U.S. politicians are trading, which stocks are getting
             attention, and where activity is happening.
@@ -110,14 +126,17 @@ function App() {
           <p>Total Trades</p>
           <h2>{stats ? stats.total_trades : "..."}</h2>
         </div>
+
         <div className="card">
           <p>Total Politicians</p>
           <h2>{stats ? stats.total_politicians : "..."}</h2>
         </div>
+
         <div className="card">
           <p>Top Ticker</p>
           <h2>{stats ? stats.top_ticker : "..."}</h2>
         </div>
+
         <div className="card">
           <p>Avg Price Change</p>
           <h2>
@@ -131,6 +150,7 @@ function App() {
       {/* ── TOP POLITICIANS ── */}
       <section className="politicians-section">
         <h2 className="section-title">Most Active Politicians</h2>
+
         <div className="politician-list">
           {politicians.length > 0 ? (
             politicians.map((pol) => (
@@ -140,15 +160,30 @@ function App() {
                     src={pol.photo_url}
                     alt={pol.name}
                     className="politician-photo"
-                    onError={(e) => (e.target.style.display = "none")}
+                    onError={(e) => {
+                      e.currentTarget.style.display = "none";
+                    }}
                   />
                 )}
+
                 <div className="politician-info">
                   <div className="politician-name">{pol.name}</div>
+
                   <div className="politician-meta">
-                    <span className={pol.party === "D" || pol.party === "Democrat" ? "party-d" : "party-r"}>
-                      {pol.party === "D" ? "Democrat" : pol.party === "R" ? "Republican" : pol.party}
+                    <span
+                      className={
+                        pol.party === "D" || pol.party === "Democrat"
+                          ? "party-d"
+                          : "party-r"
+                      }
+                    >
+                      {pol.party === "D"
+                        ? "Democrat"
+                        : pol.party === "R"
+                        ? "Republican"
+                        : pol.party}
                     </span>
+
                     <span className="politician-state">{pol.state}</span>
                   </div>
                 </div>
@@ -163,6 +198,7 @@ function App() {
       {/* ── FILTERS ── */}
       <section className="filters">
         <h2>Recent Trades</h2>
+
         <div className="filter-row">
           <select value={party} onChange={(e) => setParty(e.target.value)}>
             <option value="">All Parties</option>
@@ -185,7 +221,10 @@ function App() {
           />
 
           <button onClick={handleSearch}>Search</button>
-          <button className="secondary" onClick={clearFilters}>Clear</button>
+
+          <button className="secondary" onClick={clearFilters}>
+            Clear
+          </button>
         </div>
       </section>
 
@@ -207,30 +246,44 @@ function App() {
                   <th>Price Change</th>
                 </tr>
               </thead>
+
               <tbody>
                 {trades.map((trade, index) => (
                   <tr key={index}>
                     <td>{trade.politician_name}</td>
+
                     <td>
-                      <span className={
-                        trade.party === "D" || trade.party === "Democrat"
-                          ? "party-d"
-                          : "party-r"
-                      }>
-                        {trade.party === "D" ? "Dem" : trade.party === "R" ? "Rep" : trade.party}
+                      <span
+                        className={
+                          trade.party === "D" || trade.party === "Democrat"
+                            ? "party-d"
+                            : "party-r"
+                        }
+                      >
+                        {trade.party === "D"
+                          ? "Dem"
+                          : trade.party === "R"
+                          ? "Rep"
+                          : trade.party}
                       </span>
                     </td>
+
                     <td>{trade.state}</td>
+
                     <td className="ticker">{trade.ticker}</td>
+
                     <td>
                       <span className={getTradeTypeClass(trade.trade_type)}>
                         {trade.trade_type}
                       </span>
                     </td>
+
                     <td>{trade.trade_date}</td>
+
                     <td>
                       <span className={getPriceChangeClass(trade.price_change)}>
-                        {trade.price_change !== null && trade.price_change !== undefined
+                        {trade.price_change !== null &&
+                        trade.price_change !== undefined
                           ? `${trade.price_change >= 0 ? "+" : ""}${trade.price_change.toFixed(2)}%`
                           : "N/A"}
                       </span>
@@ -248,7 +301,11 @@ function App() {
               >
                 Previous
               </button>
-              <span>Page {page} of {totalPages}</span>
+
+              <span>
+                Page {page} of {totalPages}
+              </span>
+
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}

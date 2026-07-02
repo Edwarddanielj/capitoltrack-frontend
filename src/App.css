@@ -14,11 +14,82 @@ body {
   padding: 40px;
 }
 
+/* ── TOP NAV ── */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: 800;
+  color: #f8fafc;
+}
+
+.brand span {
+  color: #22c55e;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-pill {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nav-pill:hover {
+  border-color: #38bdf8;
+}
+
+/* ── HEADER ── */
 .hero {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 32px;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #1d9e75;
+  background: #0d2e22;
+  border: 0.5px solid #1d9e75;
+  padding: 4px 10px;
+  border-radius: 99px;
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1d9e75;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .eyebrow {
@@ -41,6 +112,7 @@ h1 {
   line-height: 1.5;
 }
 
+/* ── KPI CARDS ── */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -64,172 +136,6 @@ h1 {
 .card h2 {
   margin: 0;
   font-size: 32px;
-}
-
-.filters {
-  background: #111827;
-  border: 1px solid #1f2937;
-  border-radius: 18px;
-  padding: 24px;
-  margin-bottom: 24px;
-}
-
-.filters h2 {
-  margin-top: 0;
-}
-
-.filter-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-input,
-select {
-  background: #020617;
-  color: #e5e7eb;
-  border: 1px solid #334155;
-  padding: 12px 14px;
-  border-radius: 10px;
-  min-width: 160px;
-}
-
-button {
-  background: #38bdf8;
-  color: #020617;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: #334155;
-  color: #e5e7eb;
-}
-
-.table-card {
-  background: #111827;
-  border: 1px solid #1f2937;
-  border-radius: 18px;
-  padding: 24px;
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
-  padding: 14px;
-  border-bottom: 1px solid #1f2937;
-  text-align: left;
-  font-size: 14px;
-}
-
-th {
-  color: #94a3b8;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-}
-
-.ticker {
-  color: #38bdf8;
-  font-weight: 700;
-}
-
-.loading {
-  color: #94a3b8;
-}
-
-@media (max-width: 900px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  h1 {
-    font-size: 42px;
-  }
-}
-
-@media (max-width: 600px) {
-  .app {
-    padding: 20px;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-row {
-    flex-direction: column;
-  }
-
-  input,
-  select,
-  button {
-    width: 100%;
-  }
-}
-
-.trade-type-purchase {
-  color: #1D9E75;
-  font-weight: 600;
-  background: #E1F5EE;
-  padding: 2px 8px;
-  border-radius: 99px;
-  font-size: 12px;
-}
-
-.trade-type-sale {
-  color: #E24B4A;
-  font-weight: 600;
-  background: #FCEBEB;
-  padding: 2px 8px;
-  border-radius: 99px;
-  font-size: 12px;
-}
-
-.price-positive {
-  color: #1D9E75;
-  font-weight: 500;
-}
-
-.price-negative {
-  color: #E24B4A;
-  font-weight: 500;
-}
-
-/* ── LIVE BADGE ── */
-.live-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #1D9E75;
-  background: #0d2e22;
-  border: 0.5px solid #1D9E75;
-  padding: 4px 10px;
-  border-radius: 99px;
-  width: fit-content;
-  margin-bottom: 12px;
-}
-
-.live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #1D9E75;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
 }
 
 /* ── POLITICIANS SECTION ── */
@@ -283,16 +189,108 @@ th {
   font-size: 11px;
 }
 
-.party-d { color: #5B9BD5; font-weight: 500; }
-.party-r { color: #E24B4A; font-weight: 500; }
-.politician-state { color: #888; }
+.party-d {
+  color: #5b9bd5;
+  font-weight: 500;
+}
+
+.party-r {
+  color: #e24b4a;
+  font-weight: 500;
+}
+
+.politician-state {
+  color: #888;
+}
+
+/* ── FILTERS ── */
+.filters {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.filters h2 {
+  margin-top: 0;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+input,
+select {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  padding: 12px 14px;
+  border-radius: 10px;
+  min-width: 160px;
+}
+
+button {
+  background: #38bdf8;
+  color: #020617;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #334155;
+  color: #e5e7eb;
+}
+
+/* ── TABLE ── */
+.table-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 18px;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #1f2937;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.ticker {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.loading {
+  color: #94a3b8;
+}
 
 /* ── TRADE TYPE BADGES ── */
 .trade-type-purchase {
-  color: #1D9E75;
+  color: #1d9e75;
   font-weight: 600;
   background: #0d2e22;
-  border: 0.5px solid #1D9E75;
+  border: 0.5px solid #1d9e75;
   padding: 2px 8px;
   border-radius: 99px;
   font-size: 11px;
@@ -300,10 +298,10 @@ th {
 }
 
 .trade-type-sale {
-  color: #E24B4A;
+  color: #e24b4a;
   font-weight: 600;
   background: #2e0d0d;
-  border: 0.5px solid #E24B4A;
+  border: 0.5px solid #e24b4a;
   padding: 2px 8px;
   border-radius: 99px;
   font-size: 11px;
@@ -312,12 +310,12 @@ th {
 
 /* ── PRICE CHANGE COLORS ── */
 .price-positive {
-  color: #1D9E75;
+  color: #1d9e75;
   font-weight: 500;
 }
 
 .price-negative {
-  color: #E24B4A;
+  color: #e24b4a;
   font-weight: 500;
 }
 
@@ -353,4 +351,57 @@ th {
 .pagination span {
   color: #888;
   font-size: 13px;
+}
+
+/* ── RESPONSIVE DESIGN ── */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  .politician-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 20px;
+  }
+
+  .top-nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-row {
+    flex-direction: column;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+
+  .politician-list {
+    grid-template-columns: 1fr;
+  }
+
+  .politician-card {
+    align-items: flex-start;
+  }
+
+  .pagination {
+    flex-direction: column;
+  }
 }
